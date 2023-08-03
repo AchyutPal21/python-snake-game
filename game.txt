@@ -1,0 +1,10 @@
+The Objective of the game is to Eat the Red Food.
+
+The more you eat, the Longer You Get and score Increases by +5.
+
+If you enter into yourself or the edges you Die!!!
+------------------------------------------------------------------
+
+Game Controls-
+    Moving Keys - Up-Arrow, Down-Arrow, Right-Arrow, Left-Arrow
+    Pause/Quit - SpaceBar (Pause OR Restart), Q (Quit when Pause) 
