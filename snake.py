@@ -21,13 +21,13 @@ pygame.mixer.init()
 pygame.init()
 
 #   BG Music
-pygame.mixer.music.load("bgsong.mp3")
+pygame.mixer.music.load("./media/bgsong.mp3")
 pygame.mixer.music.play()
 
 #   Background image
-bgimg = pygame.image.load("logo.png")
+bgimg = pygame.image.load("./static/logo.png")
 bgimg = pygame.transform.scale(bgimg, (screen_width, screen_height)).convert_alpha()
-set_icon = pygame.image.load("icon.png")
+set_icon = pygame.image.load("./static/icon.png")
 pygame.display.set_icon(set_icon)
 
 #   Game Title
@@ -63,7 +63,7 @@ def welcome_screen():
                 exit_game = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    pygame.mixer.music.load("bgsong.mp3")
+                    pygame.mixer.music.load("./media/bgsong.mp3")
                     pygame.mixer.music.stop()
                     gameloop()
         pygame.display.update()
@@ -71,8 +71,8 @@ def welcome_screen():
 
 
 def game_rules():
-    if not os.path.exists("game.txt"):
-        with open("game.txt", "w") as f:
+    if not os.path.exists("./gamedata/game.txt"):
+        with open("./gamedata/game.txt", "w") as f:
             f.write("""The Objective of the game is to Eat the Red Food.
 
                 The more you eat, the Longer You Get and score Increases by +5.
@@ -130,18 +130,18 @@ def gameloop():
     fps = 60  # frame per second
     # Game Score
     score = 0
-    # Check highscore.txt file exists or not in directory.
+    # Check ./gamedata/highscore.txt file exists or not in directory.
     game_rules()  # For Game rules
-    if not os.path.exists("highscore.txt"):
-        with open("highscore.txt", "w") as f:
+    if not os.path.exists("./gamedata/highscore.txt"):
+        with open("./gamedata/highscore.txt", "w") as f:
             f.write("0")
 
-    with open("highscore.txt", "r") as f:
+    with open("./gamedata/highscore.txt", "r") as f:
         high_score = f.read()
 
     while not exit_game:
         if game_over:
-            with open("highscore.txt", "w") as f:
+            with open("./gamedata/highscore.txt", "w") as f:
                 f.write(str(high_score))
             gameWindow.fill(white)
             score_text("Game Over!!!  Press Enter To Restart.", black, 50, 150)
@@ -184,7 +184,7 @@ def gameloop():
 
             if abs(snake_x - food_x) < 10 and abs(snake_y - food_y) < 10:
                 score += 5
-                pygame.mixer.music.load("food.mp3")
+                pygame.mixer.music.load("./media/food.mp3")
                 pygame.mixer.music.play()
                 if score > 500:
                     init_velocity += 1
@@ -206,7 +206,7 @@ def gameloop():
 
             if snake_head in snake_list[: -1]:
                 game_over = True
-                pygame.mixer.music.load("over.mp3")
+                pygame.mixer.music.load("./media/over.mp3")
                 pygame.mixer.music.play()
 
             gameWindow.fill(white)
@@ -214,7 +214,7 @@ def gameloop():
             score_text("High Score " + str(high_score), mud_red, 350, 5)
             if snake_x < 0 or snake_x > screen_width or snake_y < 0 or snake_y > screen_height:
                 game_over = True
-                pygame.mixer.music.load("over.mp3")
+                pygame.mixer.music.load("./media/over.mp3")
                 pygame.mixer.music.play()
             plot_snake(gameWindow, black, snake_list, snake_size)
             pygame.draw.rect(gameWindow, red, [
